@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Alcohol>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<ul>
+@foreach(var alcohol in Model.GroupBy(n =>n.Name)){
+    <li>@alcohol.Key
+        <ul>
+                @foreach(var item in alcohol)
+                {
+                     <li>
+                        @item.OwnerId
+                        @if (item.OwnerId == UserManager.GetUserId(User))
+                          {
+                            <a href="Home/Delete?uid=@item.Uid">Törlés</a>
+                          }
+                     </li>
+                }
+        </ul>
+    </li>
+}
+</ul>
