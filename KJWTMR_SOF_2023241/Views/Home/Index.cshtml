@@ -1,16 +1,16 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @model IEnumerable<Alcohol>
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<SiteUser> SignInManager
+@inject UserManager<SiteUser> UserManager
 
 <ul>
 @foreach(var alcohol in Model.GroupBy(n =>n.Name)){
-    <li>@alcohol.Key
+    <li class="title">@alcohol.Key
         <ul>
                 @foreach(var item in alcohol)
                 {
-                     <li>
-                        @item.OwnerId
+                     <li class="owner">
+                        @item.Owner.FirstName @item.Owner.LastName
                         @if (item.OwnerId == UserManager.GetUserId(User))
                           {
                             <a href="Home/Delete?uid=@item.Uid">Törlés</a>

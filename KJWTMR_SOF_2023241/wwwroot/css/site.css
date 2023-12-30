@@ -16,3 +16,21 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.title{
+    font-size: 40px;
+    margin: 10px;
+    border-bottom: 1px solid black;
+}
+
+.owner {
+    font-size: 20px;
+    margin: 20px;
+}
+
+
+
+ul {
+    list-style-type: none;
+}
+
