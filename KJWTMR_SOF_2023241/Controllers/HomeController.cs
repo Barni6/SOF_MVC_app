@@ -10,14 +10,38 @@ namespace KJWTMR_SOF_2023241.Controllers
     public class HomeController : Controller
     {
         private readonly UserManager<SiteUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
 
-        public HomeController(UserManager<SiteUser> userManager, ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(UserManager<SiteUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _logger = logger;
             _db = db;
+        }
+
+        public async Task<IActionResult> DelegateAdmin()
+        {
+            var principal = this.User;
+            var user = await _userManager.GetUserAsync(principal);
+            var role = new IdentityRole()
+            {
+                Name = "Admin"
+            };
+            if (!await _roleManager.RoleExistsAsync("Admin"))
+            {
+                await _roleManager.CreateAsync(role);
+            }
+            await _userManager.AddToRoleAsync(user, "Admin");
+            return RedirectToAction(nameof(Index));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public IActionResult Admin()
+        {
+            return View(_db.Alcohols);
         }
 
         public IActionResult Index()
@@ -59,7 +83,17 @@ namespace KJWTMR_SOF_2023241.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminDelete(string uid)
+        {
+            var item = _db.Alcohols.FirstOrDefault(n => n.Uid == uid);
+            if (item != null)
+            {
+                _db.Alcohols.Remove(item);
+                _db.SaveChanges();
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
