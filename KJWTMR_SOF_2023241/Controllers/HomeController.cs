@@ -44,6 +44,29 @@ namespace KJWTMR_SOF_2023241.Controllers
             return View(_db.Alcohols);
         }
 
+        [Authorize(Roles = "Admin")]
+        public IActionResult Users()
+        {
+            return View(_userManager.Users);
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> RemoveAdmin(string uid)
+        {
+            var user = _userManager.Users.FirstOrDefault(t => t.Id == uid);
+            await _userManager.RemoveFromRoleAsync(user, "Admin");
+            return RedirectToAction(nameof(Users));
+        }
+
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GrantAdmin(string uid)
+        {
+            var user = _userManager.Users.FirstOrDefault(t => t.Id == uid);
+            await _userManager.AddToRoleAsync(user, "Admin");
+            return RedirectToAction(nameof(Users));
+        }
+
+
         public IActionResult Index()
         {
             return View(_db.Alcohols);
