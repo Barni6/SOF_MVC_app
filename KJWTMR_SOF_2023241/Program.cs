@@ -1,6 +1,7 @@
 using KJWTMR_SOF_2023241.Data;
 using KJWTMR_SOF_2023241.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,7 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<SiteUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = false;
+    options.SignIn.RequireConfirmedAccount = true;
     options.Password.RequireDigit = true;
     options.Password.RequiredLength = 6;
     options.Password.RequireNonAlphanumeric = false;
@@ -30,6 +31,8 @@ builder.Services.AddAuthentication().AddFacebook(opt =>
     opt.AppId = "24413343028313372";
     opt.AppSecret = "edcba77c4256087823a5ac43b7993bc9";
 });
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 
 builder.Services.AddControllersWithViews();
 

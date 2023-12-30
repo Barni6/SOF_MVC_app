@@ -2,6 +2,7 @@
 using KJWTMR_SOF_2023241.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -13,13 +14,15 @@ namespace KJWTMR_SOF_2023241.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<HomeController> _logger;
         private readonly ApplicationDbContext _db;
+        private readonly IEmailSender _emailSender;
 
-        public HomeController(UserManager<SiteUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, ApplicationDbContext db)
+        public HomeController(UserManager<SiteUser> userManager, RoleManager<IdentityRole> roleManager, ILogger<HomeController> logger, ApplicationDbContext db, IEmailSender emailSender)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _logger = logger;
             _db = db;
+            _emailSender = emailSender;
         }
 
         public async Task<IActionResult> DelegateAdmin()
