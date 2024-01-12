@@ -1,6 +1,6 @@
 ﻿@model KJWTMR_SOF_2023241.Models.Alcohol
 
-<h4>Alkohol</h4>
+<h4>Alkohol rendelés</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,12 +14,31 @@
             </div>
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Hozzáadás" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Vissza a listához</a>
 </div>
+<br />
+<br />
+<h4>Képfeltöltés</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" enctype="multipart/form-data" class="photoForm">         
+
+            <div class="form-group">
+                <label>Upload file</label>
+                <input type="file" name="photoUpload" />
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Feltöltés" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -8,6 +8,8 @@ namespace KJWTMR_SOF_2023241.Data
     {
         public DbSet<Alcohol> Alcohols { get; set; }
         public DbSet<SiteUser> Users { get; set; }
+        public DbSet<Photo> Photos { get; set; }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -20,6 +22,13 @@ namespace KJWTMR_SOF_2023241.Data
                 .WithMany()
                 .HasForeignKey(t => t.OwnerId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Photo>()
+                .HasOne(t => t.User)
+                .WithMany()
+                .HasForeignKey(t => t.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(builder);
         }
     }

@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Photo>
+
+<h2>Feltölött képek</h2>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+@{
+        foreach(var item in Model)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src="@item.PhotoUrl" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h6 class="card-title">@item.User.UserName</h6>  
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
