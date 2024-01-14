@@ -12,19 +12,19 @@ namespace KJWTMR_SOF_2023241.Controllers
     public class PhotoUploadController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _db;
-        private readonly UserManager<SiteUser> _userManager;
+        private readonly IPhotoUploadLogic _photoUploadLogic;
 
-        public PhotoUploadController(ILogger<HomeController> logger, ApplicationDbContext db, UserManager<SiteUser> userManager)
+        public PhotoUploadController(ILogger<HomeController> logger, IPhotoUploadLogic photoUploadLogic)
         {
             _logger = logger;
-            _db = db;
-            _userManager = userManager;
+            _photoUploadLogic = photoUploadLogic;
         }
 
+        [Authorize]
         public IActionResult ListPhoto()
         {
-            return View(_db.Photos);
+            var photos = _photoUploadLogic.GetPhotos();
+            return View(photos);
         }
 
         [Authorize]
@@ -37,30 +37,22 @@ namespace KJWTMR_SOF_2023241.Controllers
         [HttpPost]
         public IActionResult AddPhoto([FromForm] Photo p, [FromForm] IFormFile photoUpload)
         {
-            p.UserId = _userManager.GetUserId(this.User);
-            p.ConetntType = photoUpload.ContentType;
-            p.PhotoData = new byte[photoUpload.Length];
-            using(var stream = photoUpload.OpenReadStream())
-            {
-                stream.Read(p.PhotoData, 0, p.PhotoData.Length);
-            }
-            _db.Photos.Add(p);
-            _db.SaveChanges();
+            var user = this.User;
+            _photoUploadLogic.AddPhoto(p, photoUpload, user);
             return RedirectToAction(nameof(ListPhoto));
         }
 
         public IActionResult GetImage(string Uid)
         {
-            var photo = _db.Photos.FirstOrDefault(t => t.Uid == Uid);
-            if (photo.ConetntType.Length > 3)
+            var photoData = _photoUploadLogic.GetPhotoData(Uid);
+            if (photoData != null)
             {
-                return new FileContentResult(photo.PhotoData, photo.ConetntType);
+                return new FileContentResult(photoData, "image/jpeg"); // Módosítsd a tartalom típusát az alkalmazkodóan a valóságos típushoz
             }
             else
             {
                 return BadRequest();
             }
-
         }
     }
 }

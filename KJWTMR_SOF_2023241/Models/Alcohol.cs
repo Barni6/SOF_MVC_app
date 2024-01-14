@@ -16,6 +16,8 @@ namespace KJWTMR_SOF_2023241.Models
         public Alcohol()
         {
             Uid = Guid.NewGuid().ToString();
+            //OwnerId = Guid.NewGuid().ToString();
+            //Owner = new SiteUser();
         }
     }
 }

@@ -12,8 +12,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options
     .UseSqlServer(connectionString)
     .UseLazyLoadingProxies()
-    );
+, ServiceLifetime.Scoped);
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<ApplicationDbContext>();
+
+builder.Services.AddTransient<IHomeLogic, HomeLogic>();
+builder.Services.AddTransient<IPhotoUploadLogic, PhotoUploadLogic>();
 
 builder.Services.AddDefaultIdentity<SiteUser>(options =>
 {
