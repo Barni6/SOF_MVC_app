@@ -36,15 +36,25 @@ namespace KJWTMR_SOF_2023241.Data
             }
         }
 
+        public void DeleteAlcohol(string uid, ClaimsPrincipal user)
+        {
+            var item = _db.Alcohols.FirstOrDefault(n => n.Uid == uid);
+            if (item != null && item.OwnerId == _userManager.GetUserId(user))
+            {
+                _db.Alcohols.Remove(item);
+                _db.SaveChanges();
+            }
+        }
+
 
         public async Task DelegateAdmin(ClaimsPrincipal user)
         {
             var siteUser = await _userManager.GetUserAsync(user);
-            var role = new IdentityRole
+            var role = new IdentityRole()
             {
                 Name = "Admin"
             };
-
+                 
             if (!await _roleManager.RoleExistsAsync("Admin"))
             {
                 await _roleManager.CreateAsync(role);
@@ -70,15 +80,6 @@ namespace KJWTMR_SOF_2023241.Data
             await _userManager.AddToRoleAsync(user, "Admin");
         }
 
-        public void DeleteAlcohol(string uid, ClaimsPrincipal user)
-        {
-            var item = _db.Alcohols.FirstOrDefault(n => n.Uid == uid);
-            if (item != null && item.OwnerId == _userManager.GetUserId(user))
-            {
-                _db.Alcohols.Remove(item);
-                _db.SaveChanges();
-            }
-        }
 
         public void AdminDeleteAlcohol(string uid)
         {

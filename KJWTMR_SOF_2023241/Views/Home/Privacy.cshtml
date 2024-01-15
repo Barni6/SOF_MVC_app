@@ -1,6 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = User.IsInRole("Admin") ? "Hurrá admin vagy!" : "Üdvözöllek felhasználó!";
 }
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@if (User.IsInRole("Admin"))
+{
+    <p>Láthatod ezt az oldalt, mert Admin vagy :)</p>
+}
+else
+{
+    <p>Nem láthatod ezt az oldalt, mert nem vagy Admin :(</p>
+}

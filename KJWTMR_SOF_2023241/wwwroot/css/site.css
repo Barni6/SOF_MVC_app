@@ -14,23 +14,67 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    background-color: #fce4ec; /* Halvány rózsaszín hátteret állít be */
 }
 
 .title{
-    font-size: 40px;
+    font-size: 30px;
     margin: 10px;
     border-bottom: 1px solid black;
 }
 
 .owner {
-    font-size: 20px;
+    font-size: 15px;
     margin: 20px;
 }
-
 
 
 ul {
     list-style-type: none;
 }
+
+/* Formázások */
+
+
+/* Header (fejléc) háttérszín */
+header {
+    background-color: lightblue; /* Világos kék háttérszín a fejlécnek */
+}
+
+/* Footer (lábléc) háttérszín */
+.footer {
+    background-color: lightblue; /* Világos kék háttérszín a láblécnek */
+}
+
+/* Navbar menüpontok elválasztása */
+.navbar-nav .nav-item {
+    border-right: 1px solid grey; /* Vékony függõleges vonal a menüpontok között */
+}
+
+.border_left {
+    border-left: 1px solid grey;
+}
+
+.container-fluid {
+    text-align: center;
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px; /* Add margin for spacing */
+}
+
+h1, h2 {
+    font-family: 'Algerian', sans-serif;
+    text-align: center;
+}
+
+p {
+    font-family: 'Comic Sans MS', sans-serif;
+    text-align: justify;
+    text-align: center;
+}
+
 

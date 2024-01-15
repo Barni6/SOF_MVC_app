@@ -1,25 +1,36 @@
 ﻿@model KJWTMR_SOF_2023241.Models.Alcohol
 
-<h4>Alkohol rendelés</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Add">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div style="margin-top: 30px;" class="container">
+    <h4 style="margin-bottom: 20px;">Ital rendelés</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="Add">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label asp-for="Name" class="control-label">Ital neve</label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
 
-            <div class="form-group">
-                <input type="submit" value="Hozzáadás" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Hozzáadás" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="ListAlcohol">Vissza a listához</a>
+    <p style="margin-top: 20px;">
+        <br />
+        Kérlek adjátok hozzá, hogy milyen italokat szeretnétek fogyasztani a bulin.
+        <br />
+        Az italokat a befizetett összegből vesszük meg, nem kötelező hozni, de aki szeretne az nyugodtan hozhat magával bármit.
+        <br />
+        A leadott rendeléseket csak a regisztrált felhasználók láthatják!
+    </p>
+
+    <div style="margin-top: 20px;">
+        <a asp-action="ListAlcohol">Vissza a listához</a>
+    </div>
 </div>

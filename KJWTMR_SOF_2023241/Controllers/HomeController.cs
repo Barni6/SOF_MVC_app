@@ -45,6 +45,14 @@ namespace KJWTMR_SOF_2023241.Controllers
             return RedirectToAction(nameof(ListAlcohol));
         }
 
+        public IActionResult Delete(string uid)
+        {
+            _homeLogic.DeleteAlcohol(uid, this.User);
+            return RedirectToAction(nameof(ListAlcohol));
+        }
+
+
+
         public async Task<IActionResult> DelegateAdmin()
         {
             await _homeLogic.DelegateAdmin(this.User);
@@ -75,12 +83,6 @@ namespace KJWTMR_SOF_2023241.Controllers
         {
             await _homeLogic.GrantAdmin(uid);
             return RedirectToAction(nameof(Users));
-        }
-
-        public IActionResult Delete(string uid)
-        {
-            _homeLogic.DeleteAlcohol(uid, this.User);
-            return RedirectToAction(nameof(ListAlcohol));
         }
 
         [Authorize(Roles = "Admin")]

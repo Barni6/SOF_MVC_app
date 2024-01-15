@@ -1,24 +1,30 @@
-﻿
+﻿<div style="margin-top: 30px;" class="container">
+    <h4 style="margin-bottom: 20px;">Képfeltöltés</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <form asp-action="AddPhoto" method="post" enctype="multipart/form-data" class="photoForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<h4>Képfeltöltés</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="AddPhoto" method="post" enctype="multipart/form-data" class="photoForm">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group" style="margin-bottom: 15px;">
+                    <label>Kép feltöltése</label>
+                    <input type="file" name="photoUpload" />
+                </div>
 
-            <div class="form-group">
-                <label>Upload file</label>
-                <input type="file" name="photoUpload" />
-            </div>
-
-            <div class="form-group">
-                <input type="submit" value="Feltöltés" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Feltöltés" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="ListPhoto">Vissza a listához</a>
+    <p style="margin-top: 20px;">
+        A buli után itt tudjátok megosztani egymással és letölteni magatoknak az elkészült képeket.
+        <br />
+        A feltöltött képeket csak a regisztrált felhasználók láthatják!
+    </p>
+
+    <div style="margin-top: 20px;">
+        <a asp-action="ListPhoto">Vissza a listához</a>
+    </div>
 </div>
