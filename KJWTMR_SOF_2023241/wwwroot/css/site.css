@@ -66,10 +66,11 @@ header {
     margin-top: 10px; /* Add margin for spacing */
 }
 
-h1, h2 {
+h1, h2, h3, h4 {
     font-family: 'Algerian', sans-serif;
     text-align: center;
 }
+
 
 p {
     font-family: 'Comic Sans MS', sans-serif;
