@@ -7,6 +7,6 @@ namespace KJWTMR_SOF_2023241.Data
     {
         IEnumerable<Photo> GetPhotos();
         void AddPhoto(Photo photo, IFormFile photoUpload, ClaimsPrincipal user);
-        byte[] GetPhotoData(string Uid);
+        //byte[] GetPhotoData(string Uid);
     }
 }

@@ -52,7 +52,6 @@ namespace KJWTMR_SOF_2023241.Controllers
         }
 
 
-
         public async Task<IActionResult> DelegateAdmin()
         {
             await _homeLogic.DelegateAdmin(this.User);

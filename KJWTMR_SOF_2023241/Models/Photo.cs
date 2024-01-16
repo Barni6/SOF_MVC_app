@@ -22,13 +22,8 @@ namespace KJWTMR_SOF_2023241.Models
         [NotMapped]
         public virtual IdentityUser User { get; set; }
 
-        public byte[] PhotoData { get; set; }
-
-        [StringLength(100)]
-        public string ConetntType { get; set; }
-
-        //[StringLength(100)]
-        //public string PhotoUrl { get; set; }
+        [StringLength(250)]
+        public string PhotoUrl { get; set; }
 
         public Photo()
         {

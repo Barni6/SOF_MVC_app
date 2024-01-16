@@ -1,4 +1,5 @@
-﻿using KJWTMR_SOF_2023241.Data;
+﻿using Azure.Storage.Blobs;
+using KJWTMR_SOF_2023241.Data;
 using KJWTMR_SOF_2023241.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -13,6 +14,7 @@ namespace KJWTMR_SOF_2023241.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IPhotoUploadLogic _photoUploadLogic;
+
 
         public PhotoUploadController(ILogger<HomeController> logger, IPhotoUploadLogic photoUploadLogic)
         {
@@ -42,17 +44,17 @@ namespace KJWTMR_SOF_2023241.Controllers
             return RedirectToAction(nameof(ListPhoto));
         }
 
-        public IActionResult GetImage(string Uid)
-        {
-            var photoData = _photoUploadLogic.GetPhotoData(Uid);
-            if (photoData != null)
-            {
-                return new FileContentResult(photoData, "image/jpeg"); // Módosítsd a tartalom típusát az alkalmazkodóan a valóságos típushoz
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
+        //public IActionResult GetImage(string Uid)
+        //{
+        //    var photoData = _photoUploadLogic.GetPhotoData(Uid);
+        //    if (photoData != null)
+        //    {
+        //        return new FileContentResult(photoData, "image/jpeg"); // Módosítsd a tartalom típusát az alkalmazkodóan a valóságos típushoz
+        //    }
+        //    else
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
     }
 }
